@@ -1,0 +1,113 @@
+<div class="frontpage-main">
+    <div class="frontpage-left-content">
+        <div class="frontpage-meeting-tabs">
+            <div class="div-float-left">
+                <input type="button" value="History meeting" ng-click="viewHistory()" />
+                <input type="button" value="Meeting files" ng-click="viewHistory()" />
+            </div>
+            <div class="div-float-left" ng-show="historyList.length">
+                <table style="text-align: center" cellspacing="2" cellpadding="2">
+                    <br>
+                    <tr data-ng-repeat="record in historyList">
+                        <td>
+                            <table cellspacing="2" cellpadding="2">
+                                <tr>
+                                    <td>
+                                        <label class="white">{{record.start_time}}</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="white">{{record.description}}</label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="frontpage-right-content">
+
+    <div class="div-float-left div-block">
+        <div ng-if="userHasSession">
+            <label class="header-title">{{session.description}}</label>
+        </div>
+        <div ng-if="!userHasSession" class="frontpage-header-center">
+            <table cellspacing="2" cellpadding="2">
+                <tr>
+                    <th class="text-left"><label>Meeting description</label></th>
+                    <td>
+                        <input type="text" name="name" ng-model="session.description" value="{{session.description}}" />
+                    </td>
+                    <td>
+                        <input type="button" value="Start meeting" ng-click="startNewSession()" />
+                    </td>
+                    <td>
+                        <select ng-disabled="!sessionsList.length" ng-model="sessionsListValue" ng-options="session.description for session in sessionsList" ng-change=""></select>
+                    </td>
+                    <td>
+                        <input type="button" ng-disabled="!sessionsList.length" value="Join meeting" ng-click="joinSession(sessionsListValue.session_id)" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left"><label>Name</label></th>
+                    <td>
+                        <input type="text" name="name" ng-model="session.name" value="{{session.name}}" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="text-left"><label>Email</label></th>
+                    <td>
+                        <input type="text" name="emailAddress" ng-model="session.email" value="{{session.email}}" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div ng-if="userHasSession" class="frontpage-header-center div-float-right">
+            <input type="button" value="End meeting" ng-click="endSession()" />
+        </div>
+    </div>
+        <div class="frontpage-header">
+            <div class="div-float-right div-block" ng-if="userHasSession">
+                <div class="round-corners-light header-right-content-size">
+                    <label class="normal center-text">{{timeElapsed}}</label>
+                    <label class="normal center-text">{{startDate}}</label>
+                </div>
+                <div class="round-corners-dark header-right-content-size">
+                    <label class="normal white center-text" ng-model="session.owner_name">{{session.owner_name}}</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="frontpage-content">
+            <div class="div-block frontpage-clients-row" ng-show="connectedUsers.length">
+                <table>
+                    <tr>
+                        <td data-ng-repeat="data in connectedUsers" ng-model="connectedUsers">
+                            <label class="normal">{{data.name}}</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="div-block frontpage-table-row">
+                <div class="div-block frontpage-table-inside">
+                    <notes-area ng-show="meetingNotesEditable"></notes-area>
+                    <read-only-notes-area ng-show="!meetingNotesEditable"></read-only-notes-area>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="frontpage-footer">
+    </div>
+    <start-meeting-popup></start-meeting-popup>
+</div>

@@ -1,0 +1,7 @@
+<div class="frontpage-table-inside-notes">
+    <table>
+        <tr data-ng-repeat="note in meetingNotes" ng-model="meetingNotes">
+            <td ng-click="addComment(note.note_id)">{{note.data}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,51 @@
+<div ng-show="showStartMeetingPopup">
+    <div class="popup-main-div"></div>
+    <div class="popup-main-div-opaque">
+        <div class="popup-main-div-content">
+            <div class="popup-main-div-content-inside">
+                <div class="div-block">
+                    <div ng-if="userHasSession">
+                        <label class="header-title">{{session.description}}</label>
+                    </div>
+                    <div ng-if="!userHasSession" class="frontpage-header-center">
+                        <table cellspacing="2" cellpadding="2">
+                            <tr>
+                                <th class="text-left"><label>Meeting description</label></th>
+                                <td>
+                                    <input type="text" name="name" ng-model="session.description" value="{{session.description}}" />
+                                </td>
+                                <td>
+                                    <input type="button" value="Start meeting" ng-click="startNewSession()" />
+                                </td>
+                                <td>
+                                    <select ng-disabled="!sessionsList.length" ng-model="sessionsListValue" ng-options="session.description for session in sessionsList" ng-change=""></select>
+                                </td>
+                                <td>
+                                    <input type="button" ng-disabled="!sessionsList.length" value="Join meeting" ng-click="joinSession(sessionsListValue.session_id)" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-left"><label>Name</label></th>
+                                <td>
+                                    <input type="text" name="name" ng-model="session.name" value="{{session.name}}" />
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th class="text-left"><label>Email</label></th>
+                                <td>
+                                    <input type="text" name="emailAddress" ng-model="session.email" value="{{session.email}}" />
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
